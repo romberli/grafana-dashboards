@@ -11,7 +11,7 @@ API_KEY = os.getenv('IMPORT_DASH_API_KEY', '***')
 USERNAME = os.getenv('IMPORT_DASH_USERNAME')
 PASSWORD = os.getenv('IMPORT_DASH_PASSWORD')
 
-DIR = 'pmm-app/src/dashboards/'
+BASE_DIR = 'pmm-app/src/dashboards/'
 
 
 def main():
@@ -22,15 +22,15 @@ def main():
     else:
         auth = (USERNAME, PASSWORD)
 
-    dashboard_dirs = os.listdir(DIR)
-    for dir in dashboard_dirs:
-        files = os.listdir(DIR + dir)
+    dashboard_dirs = os.listdir(BASE_DIR)
+    for dashboard_dir in dashboard_dirs:
+        files = os.listdir(BASE_DIR + dashboard_dir)
         for file in files:
             if not file.endswith('.json'):
                 continue
 
             print(file)
-            f = open(DIR + dir + '/' + file, 'r')
+            f = open(BASE_DIR + dashboard_dir + '/' + file, 'r')
             dash = json.load(f)
             f.close()
 
